@@ -30,9 +30,9 @@ public class InicioGUI extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txNomeInicio = new javax.swing.JTextField();
+        txNome = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txNomeSenha = new javax.swing.JTextField();
+        txSenha = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         bEntrarInicio = new javax.swing.JButton();
 
@@ -98,8 +98,8 @@ public class InicioGUI extends javax.swing.JDialog {
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel1)))
-                            .addComponent(txNomeInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                            .addComponent(txNomeSenha))))
+                            .addComponent(txNome, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                            .addComponent(txSenha))))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -114,10 +114,10 @@ public class InicioGUI extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txNomeInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txNomeSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addComponent(bEntrarInicio)
@@ -148,8 +148,8 @@ public class InicioGUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bEntrarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarInicioActionPerformed
-        if (String.format(txNomeInicio.getText()) != "") {
-            nomeUsuario = String.format(txNomeInicio.getText());
+        if (String.format(txNome.getText()) != "") {
+            nomeUsuario = String.format(txNome.getText());
             entrarPrincipal = true;
             this.dispose();
         } else {
@@ -208,7 +208,7 @@ public class InicioGUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txNomeInicio;
-    private javax.swing.JTextField txNomeSenha;
+    private javax.swing.JTextField txNome;
+    private javax.swing.JTextField txSenha;
     // End of variables declaration//GEN-END:variables
 }

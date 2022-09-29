@@ -1,11 +1,10 @@
 package br.com.ronick.view;
 
+import br.com.ronick.controller.BaseFacade;
 import br.com.ronick.model.DAO.ClienteDAO;
 import br.com.ronick.model.DAO.ProdutoDAO;
-import br.com.ronick.model.DAO.VendaDAO;
 import br.com.ronick.model.entidade.Cliente;
 import br.com.ronick.model.entidade.Produto;
-import br.com.ronick.model.entidade.Venda;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +30,7 @@ public class RealizarVendaGUI extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        bRealizarVenda = new javax.swing.JButton();
         labelCpf = new javax.swing.JLabel();
         txCpf = new javax.swing.JFormattedTextField();
         labelNome = new javax.swing.JLabel();
@@ -59,10 +58,10 @@ public class RealizarVendaGUI extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(0, 70, 74));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft Himalaya", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jButton1.setText("Finalizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bRealizarVenda.setText("Finalizar");
+        bRealizarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bRealizarVendaActionPerformed(evt);
             }
         });
 
@@ -110,12 +109,18 @@ public class RealizarVendaGUI extends javax.swing.JInternalFrame {
         labelTelefone.setForeground(new java.awt.Color(255, 255, 255));
         labelTelefone.setText("Preco");
 
+        txNome.setEditable(false);
+        txNome.setToolTipText("");
+        txNome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(txNome);
 
+        txPreco.setEditable(false);
         jScrollPane2.setViewportView(txPreco);
 
+        txQtde.setEditable(false);
         jScrollPane3.setViewportView(txQtde);
 
+        txNomeProd.setEditable(false);
         jScrollPane4.setViewportView(txNomeProd);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -161,7 +166,7 @@ public class RealizarVendaGUI extends javax.swing.JInternalFrame {
                         .addGap(16, 16, 16))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(bRealizarVenda)
                         .addGap(49, 49, 49))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -193,7 +198,7 @@ public class RealizarVendaGUI extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(jButton1)
+                .addComponent(bRealizarVenda)
                 .addGap(41, 41, 41))
         );
 
@@ -243,22 +248,19 @@ public class RealizarVendaGUI extends javax.swing.JInternalFrame {
         txQtde.setText(String.format(produto.getQtdeEstoque() + ""));
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Cliente cliente = ClienteDAO.selecionarPorCpf(txCpf.getText());
-        Produto produto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
-        String cpf = cliente.getCpf();
-        Venda venda = new Venda(cliente.getCpf(), produto.getId(), produto.getPreco());
-        VendaDAO.inserir(venda);
-        Produto produtoQtdeMenos = new Produto(produto.getId(), produto.getNome(), produto.getPreco(),
-        (produto.getQtdeEstoque() - 1));
-        ProdutoDAO.alterarQtde(produtoQtdeMenos);
-        JOptionPane.showMessageDialog(null, "Venda realizada com sucesso");
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void bRealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRealizarVendaActionPerformed
+        if (!txCpf.getText().isEmpty() && !txCodigo.getText().isEmpty()) {
+            BaseFacade.vendaRealizada(txCpf.getText(), txCodigo.getText());
+            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso");
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Não existe dados a serem inseridos");
+        }
+    }//GEN-LAST:event_bRealizarVendaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bRealizarVenda;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;

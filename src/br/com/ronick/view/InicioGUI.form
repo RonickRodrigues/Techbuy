@@ -82,8 +82,8 @@
                                       <Component id="jLabel1" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="txNomeInicio" alignment="0" pref="272" max="32767" attributes="0"/>
-                              <Component id="txNomeSenha" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txNome" alignment="0" pref="272" max="32767" attributes="0"/>
+                              <Component id="txSenha" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -104,11 +104,11 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txNomeInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txNomeSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -168,7 +168,7 @@
             <Property name="text" type="java.lang.String" value="Digite seu Nome:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txNomeInicio">
+        <Component class="javax.swing.JTextField" name="txNome">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -181,7 +181,7 @@
             <Property name="text" type="java.lang.String" value="Digite sua Senha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txNomeSenha">
+        <Component class="javax.swing.JTextField" name="txSenha">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>

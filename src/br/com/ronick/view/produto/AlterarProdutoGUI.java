@@ -1,19 +1,18 @@
-package br.com.ronick.view;
+package br.com.ronick.view.produto;
 
-import br.com.ronick.model.DAO.ClienteDAO;
-import br.com.ronick.model.entidade.Cliente;
-import java.util.List;
+import br.com.ronick.model.DAO.ProdutoDAO;
+import br.com.ronick.model.entidade.Produto;
 import javax.swing.JOptionPane;
 
 /**
  * @author ronick
  */
-public class AlterarClienteGUI extends javax.swing.JInternalFrame {
+public class AlterarProdutoGUI extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastrarCliente
      */
-    public AlterarClienteGUI() {
+    public AlterarProdutoGUI() {
         initComponents();
     }
 
@@ -29,16 +28,16 @@ public class AlterarClienteGUI extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         labelCpf = new javax.swing.JLabel();
-        txCpf = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        bAlterar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txNome = new javax.swing.JTextField();
         labelNome = new javax.swing.JLabel();
         labelTelefone = new javax.swing.JLabel();
-        txTelefone = new javax.swing.JFormattedTextField();
         labelEndereco = new javax.swing.JLabel();
-        txEndereco = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txQtde = new javax.swing.JTextField();
+        txPreco = new javax.swing.JTextField();
+        txCodigo = new javax.swing.JTextField();
+        bVerifica = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -46,22 +45,16 @@ public class AlterarClienteGUI extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(0, 70, 74));
 
         jPanel2.setBackground(new java.awt.Color(0, 70, 74));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alterar Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft Himalaya", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alterar Produto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft Himalaya", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
         labelCpf.setFont(new java.awt.Font("Microsoft Himalaya", 0, 24)); // NOI18N
         labelCpf.setForeground(new java.awt.Color(255, 255, 255));
-        labelCpf.setText("CPF do cliente a ser alterado");
+        labelCpf.setText("Código do produto");
 
-        try {
-            txCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        jButton1.setText("Atualizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bAlterar.setText("Atualizar");
+        bAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bAlterarActionPerformed(evt);
             }
         });
 
@@ -74,61 +67,51 @@ public class AlterarClienteGUI extends javax.swing.JInternalFrame {
 
         labelTelefone.setFont(new java.awt.Font("Microsoft Himalaya", 0, 24)); // NOI18N
         labelTelefone.setForeground(new java.awt.Color(255, 255, 255));
-        labelTelefone.setText("Telefone");
-
-        try {
-            txTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        labelTelefone.setText("Preco");
 
         labelEndereco.setFont(new java.awt.Font("Microsoft Himalaya", 0, 24)); // NOI18N
         labelEndereco.setForeground(new java.awt.Color(255, 255, 255));
-        labelEndereco.setText("Endereço");
+        labelEndereco.setText("Estoque");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(labelEndereco)
-                        .addGap(18, 18, 18)
-                        .addComponent(txEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNome)
-                            .addComponent(labelTelefone))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelNome)
+                    .addComponent(labelTelefone)
+                    .addComponent(labelEndereco))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNome)
                     .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTelefone)
-                    .addComponent(txTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelEndereco))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
-        jButton2.setText("Verificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bVerifica.setText("Verificar");
+        bVerifica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bVerificaActionPerformed(evt);
             }
         });
 
@@ -139,34 +122,34 @@ public class AlterarClienteGUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(labelCpf)
-                .addGap(18, 18, 18)
-                .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bVerifica)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(86, 86, 86))
+                        .addComponent(bAlterar)
+                        .addGap(101, 101, 101))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84))))
+                        .addGap(80, 80, 80))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCpf)
-                    .addComponent(jButton2))
+                    .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bVerifica))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(20, 20, 20))
+                .addComponent(bAlterar)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -175,15 +158,15 @@ public class AlterarClienteGUI extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,39 +177,41 @@ public class AlterarClienteGUI extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 694, 429);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Cliente cliente = ClienteDAO.selecionarPorCpf(txCpf.getText());
-        txNome.setText(cliente.getNome());
-        txTelefone.setText(cliente.getTelefone());
-        txEndereco.setText(cliente.getEndereco());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void bVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificaActionPerformed
+        Produto produto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
+        txNome.setText(produto.getNome());
+        txPreco.setText(String.format(produto.getPreco() + ""));
+        txQtde.setText(String.format(produto.getQtdeEstoque() + ""));
+    }//GEN-LAST:event_bVerificaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
+        if (!txNome.getText().isEmpty() && !txPreco.getText().isEmpty() 
+                && !txQtde.getText().isEmpty()) {
         String nome = txNome.getText();
-        String cpf = txCpf.getText();
-        String telefone = txTelefone.getText();
-        String endereco = txEndereco.getText();
-        Cliente idCliente = ClienteDAO.selecionarPorCpf(txCpf.getText());
-        System.out.println(idCliente.getId());
-        Cliente cliente = new Cliente(idCliente.getId(), nome, cpf, telefone, endereco);
-        ClienteDAO.alterar(cliente);
+        int preco = Integer.parseInt(txPreco.getText());
+        int qtde = Integer.parseInt(txQtde.getText());
+        Produto idProduto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
+        Produto cliente = new Produto(idProduto.getId(), nome, preco, qtde);
+        ProdutoDAO.alterar(cliente);
         JOptionPane.showMessageDialog(null, "Dados alterados com sucesso");
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        } else {
+            JOptionPane.showMessageDialog(null, "Não existe dados a serem inseridos");
+        }
+    }//GEN-LAST:event_bAlterarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton bAlterar;
+    private javax.swing.JButton bVerifica;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -234,9 +219,9 @@ public class AlterarClienteGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelEndereco;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelTelefone;
-    private javax.swing.JFormattedTextField txCpf;
-    private javax.swing.JTextField txEndereco;
+    private javax.swing.JTextField txCodigo;
     private javax.swing.JTextField txNome;
-    private javax.swing.JFormattedTextField txTelefone;
+    private javax.swing.JTextField txPreco;
+    private javax.swing.JTextField txQtde;
     // End of variables declaration//GEN-END:variables
 }

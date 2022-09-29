@@ -1,4 +1,4 @@
-package br.com.ronick.view;
+package br.com.ronick.view.produto;
 
 import br.com.ronick.model.DAO.ProdutoDAO;
 import br.com.ronick.model.entidade.Produto;
@@ -27,7 +27,7 @@ public class CadastrarProdutoGUI extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        bCadastrar = new javax.swing.JButton();
         labelNome = new javax.swing.JLabel();
         txNome = new javax.swing.JTextField();
         labelTelefone = new javax.swing.JLabel();
@@ -43,10 +43,10 @@ public class CadastrarProdutoGUI extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(0, 70, 74));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar novo Produto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft Himalaya", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bCadastrar.setText("Cadastrar");
+        bCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bCadastrarActionPerformed(evt);
             }
         });
 
@@ -79,7 +79,7 @@ public class CadastrarProdutoGUI extends javax.swing.JInternalFrame {
                             .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1))
+                    .addComponent(bCadastrar))
                 .addGap(82, 82, 82))
         );
         jPanel2Layout.setVerticalGroup(
@@ -98,7 +98,7 @@ public class CadastrarProdutoGUI extends javax.swing.JInternalFrame {
                     .addComponent(labelTelefone1)
                     .addComponent(txQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(bCadastrar)
                 .addGap(53, 53, 53))
         );
 
@@ -136,7 +136,9 @@ public class CadastrarProdutoGUI extends javax.swing.JInternalFrame {
         setBounds(0, 0, 694, 429);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
+        if (!txNome.getText().isEmpty() && !txPreco.getText().isEmpty() 
+                && !txQtde.getText().isEmpty()) {
         String nome = txNome.getText();
         int preco = Integer.parseInt(txPreco.getText());
         int qtde = Integer.parseInt(txQtde.getText());
@@ -144,11 +146,14 @@ public class CadastrarProdutoGUI extends javax.swing.JInternalFrame {
         ProdutoDAO.inserir(produto);
         JOptionPane.showMessageDialog(null, "Produto inserido com sucesso");
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        } else {
+            JOptionPane.showMessageDialog(null, "Não existem produtos a serem inseridos");
+        }
+    }//GEN-LAST:event_bCadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bCadastrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelNome;

@@ -1,16 +1,17 @@
 package br.com.ronick.view;
 
+import br.com.ronick.view.produto.EntradaNoEstoqueGUI;
+import br.com.ronick.view.produto.RemoverProdutoGUI;
+import br.com.ronick.view.produto.CadastrarProdutoGUI;
+import br.com.ronick.view.produto.AlterarProdutoGUI;
+import br.com.ronick.view.cliente.RemoverClienteGUI;
+import br.com.ronick.view.cliente.CadastrarClienteGUI;
+import br.com.ronick.view.cliente.AlterarClienteGUI;
 import br.com.ronick.controller.BaseFacade;
 import br.com.ronick.controller.TechbuyDB;
-import br.com.ronick.model.DAO.ClienteDAO;
-import br.com.ronick.model.DAO.ProdutoDAO;
 import br.com.ronick.model.DAO.VendaDAO;
-import br.com.ronick.model.entidade.Cliente;
-import br.com.ronick.model.entidade.Produto;
-import br.com.ronick.model.entidade.Venda;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,8 +21,6 @@ import javax.swing.table.DefaultTableModel;
 public class TelaPrincipalGUI extends javax.swing.JFrame {
 
     // Instanciação de objetos e declaração de variáveis
-    BaseFacade base = new BaseFacade();
-    int total;
 
     public TelaPrincipalGUI() {
 
@@ -34,59 +33,34 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
     public void telaUsuario() {
         InicioGUI tInicio = new InicioGUI(this, true);
         tInicio.setVisible(true);
-        base.fecharPrograma(tInicio.entrarPrincipal);
+        BaseFacade.fecharPrograma(tInicio.entrarPrincipal);
         lNomeUsuario.setText("Bem Vindo " + tInicio.nomeUsuario);
     }
 
     public void atualiza() {
         String[] cposCliente = {"Nome", "CPF", "Telefone", "Endereço"};
-        List<Cliente> Cliente = ClienteDAO.selecionarTodos();
-        String[][] dadosCliente = new String[Cliente.size()][4];
-        int posicao = 0;
-        for (Cliente clt : Cliente) {
-            String[] umcliente = new String[4];
-            umcliente[0] = clt.getNome();
-            umcliente[1] = clt.getCpf();
-            umcliente[2] = clt.getTelefone();
-            umcliente[3] = clt.getEndereco();
-            dadosCliente[posicao++] = umcliente;
-        }
+        String[][] dadosCliente;
+        dadosCliente = BaseFacade.dadosDosClientes(cposCliente);
         DefaultTableModel modelo = new DefaultTableModel(
                 dadosCliente, cposCliente);
         tClieCadastrados.setModel(modelo);
+        
         String[] cposProduto = {"Nome", "Preço", "Qtde de Estoque", "Codigo do Produto"};
-        List<Produto> produto = ProdutoDAO.selecionarTodos();
-        String[][] dadosProduto = new String[produto.size()][4];
-        posicao = 0;
-        for (Produto pdt : produto) {
-            String[] umproduto = new String[4];
-            umproduto[0] = pdt.getNome();
-            umproduto[1] = String.valueOf(pdt.getPreco());
-            umproduto[2] = String.valueOf(pdt.getQtdeEstoque());
-            umproduto[3] = String.valueOf(pdt.getId());
-            dadosProduto[posicao++] = umproduto;
-        }
+        String[][] dadosProduto;
+        dadosProduto = BaseFacade.dadosDosProdutos(cposProduto);
         DefaultTableModel modelo2 = new DefaultTableModel(
                 dadosProduto, cposProduto);
         tProdCadastrados.setModel(modelo2);
+        
         String[] cposVenda = {"ID Venda", "CPF do Comprador", "Codigo do Produto", "Valor da Venda"};
-        List<Venda> venda = VendaDAO.selecionarTodos();
-        String[][] dadosVenda = new String[venda.size()][4];
-        posicao = 0;
-        for (Venda vnd : venda) {
-            String[] umavenda = new String[4];
-            umavenda[0] = String.valueOf(vnd.getId());
-            umavenda[1] = vnd.getCpfComprador();
-            umavenda[2] = String.valueOf(vnd.getCodigoProd());
-            umavenda[3] = String.valueOf(vnd.getValor());
-            dadosVenda[posicao++] = umavenda;
-        }
+        String[][] dadosVenda;
+        dadosVenda = BaseFacade.dadosDasVendas(cposProduto);
         DefaultTableModel modelo3 = new DefaultTableModel(
                 dadosVenda, cposVenda);
         tVenda.setModel(modelo3);
         
-        total = VendaDAO.totalValor();
-        txValorTotal.setText(String.format(total + ""));
+        int total = VendaDAO.totalValor();
+        txValorTotal.setText(String.format(""+total));
     }
 
     /**
@@ -215,7 +189,7 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tVenda);
 
-        TabelaClienteProduto.addTab("Vendas Realizadas", jScrollPane1);
+        TabelaClienteProduto.addTab("Histórico de Vendas", jScrollPane1);
 
         javax.swing.GroupLayout jDPaneLayout = new javax.swing.GroupLayout(jDPane);
         jDPane.setLayout(jDPaneLayout);

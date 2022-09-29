@@ -1,4 +1,4 @@
-package br.com.ronick.view;
+package br.com.ronick.view.cliente;
 
 import br.com.ronick.model.DAO.ClienteDAO;
 import br.com.ronick.model.entidade.Cliente;
@@ -35,7 +35,7 @@ public class CadastrarClienteGUI extends javax.swing.JInternalFrame {
         txCpf = new javax.swing.JFormattedTextField();
         txTelefone = new javax.swing.JFormattedTextField();
         txEndereco = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        bCadastrar = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -73,10 +73,10 @@ public class CadastrarClienteGUI extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bCadastrar.setText("Cadastrar");
+        bCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bCadastrarActionPerformed(evt);
             }
         });
 
@@ -88,7 +88,7 @@ public class CadastrarClienteGUI extends javax.swing.JInternalFrame {
                 .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(bCadastrar)
                         .addGap(82, 82, 82))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -130,7 +130,7 @@ public class CadastrarClienteGUI extends javax.swing.JInternalFrame {
                     .addComponent(txEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelEndereco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(bCadastrar)
                 .addGap(31, 31, 31))
         );
 
@@ -168,20 +168,25 @@ public class CadastrarClienteGUI extends javax.swing.JInternalFrame {
         setBounds(0, 0, 694, 429);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nome = txNome.getText();
-        String cpf = txCpf.getText();
-        String telefone = txTelefone.getText();
-        String endereco = txEndereco.getText();
-        Cliente cliente = new Cliente(nome, cpf, telefone, endereco);
-        ClienteDAO.inserir(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso");
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
+        if (!txCpf.getText().isEmpty() && !txCpf.getText().isEmpty() 
+                && !txTelefone.getText().isEmpty() && !txEndereco.getText().isEmpty()) {
+            String nome = txNome.getText();
+            String cpf = txCpf.getText();
+            String telefone = txTelefone.getText();
+            String endereco = txEndereco.getText();
+            Cliente cliente = new Cliente(nome, cpf, telefone, endereco);
+            ClienteDAO.inserir(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso");
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Não existe dados a serem inseridos");
+        }
+    }//GEN-LAST:event_bCadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bCadastrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelCpf;

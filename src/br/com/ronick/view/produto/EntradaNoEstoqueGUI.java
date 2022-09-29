@@ -1,4 +1,4 @@
-package br.com.ronick.view;
+package br.com.ronick.view.produto;
 
 import br.com.ronick.model.DAO.ProdutoDAO;
 import br.com.ronick.model.entidade.Produto;
@@ -27,7 +27,7 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        bCadastrar = new javax.swing.JButton();
         labelCpf = new javax.swing.JLabel();
         txCodigo = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
@@ -39,7 +39,7 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
         txNome = new javax.swing.JTextPane();
         txEntrada = new javax.swing.JTextField();
         labelEndereco = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        bVerificar = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -49,10 +49,10 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(0, 70, 74));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entrada no Estoque", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft Himalaya", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bCadastrar.setText("Cadastrar");
+        bCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bCadastrarActionPerformed(evt);
             }
         });
 
@@ -71,8 +71,10 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
         labelTelefone.setForeground(new java.awt.Color(255, 255, 255));
         labelTelefone.setText("Preco");
 
+        txPreco.setEditable(false);
         jScrollPane1.setViewportView(txPreco);
 
+        txNome.setEditable(false);
         jScrollPane2.setViewportView(txNome);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -112,10 +114,10 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
         labelEndereco.setForeground(new java.awt.Color(255, 255, 255));
         labelEndereco.setText("Qtde a entrar no estoque");
 
-        jButton2.setText("Verificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bVerificar.setText("Verificar");
+        bVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bVerificarActionPerformed(evt);
             }
         });
 
@@ -137,12 +139,12 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txCodigo)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(bVerificar)
                         .addGap(159, 159, 159))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(bCadastrar))
                         .addGap(82, 82, 82))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -152,7 +154,7 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCpf)
                     .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(bVerificar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +162,7 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(bCadastrar)
                 .addGap(31, 31, 31))
         );
 
@@ -198,26 +200,30 @@ public class EntradaNoEstoqueGUI extends javax.swing.JInternalFrame {
         setBounds(0, 0, 694, 429);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificarActionPerformed
         Produto produto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
         txNome.setText(produto.getNome());
         txPreco.setText(String.format(produto.getPreco() + ""));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bVerificarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Produto produto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
-        int somaQtde = produto.getQtdeEstoque() + Integer.parseInt(txEntrada.getText());
-        Produto produtoQtdeAlterada = new Produto(produto.getId(), produto.getNome(),
-        produto.getPreco(), somaQtde);
-        ProdutoDAO.alterarQtde(produtoQtdeAlterada);
-        JOptionPane.showMessageDialog(null, "Entrada de estoque realizada com sucesso");
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
+        if (!txCodigo.getText().isEmpty() && !txEntrada.getText().isEmpty()) {
+            Produto produto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
+            int somaQtde = produto.getQtdeEstoque() + Integer.parseInt(txEntrada.getText());
+            Produto produtoQtdeAlterada = new Produto(produto.getId(), produto.getNome(),
+                    produto.getPreco(), somaQtde);
+            ProdutoDAO.alterarQtde(produtoQtdeAlterada);
+            JOptionPane.showMessageDialog(null, "Entrada de estoque realizada com sucesso");
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Não existem dados a ser inseridos");
+        }
+    }//GEN-LAST:event_bCadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton bCadastrar;
+    private javax.swing.JButton bVerificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

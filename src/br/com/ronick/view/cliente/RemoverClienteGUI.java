@@ -1,18 +1,18 @@
-package br.com.ronick.view;
+package br.com.ronick.view.cliente;
 
-import br.com.ronick.model.DAO.ProdutoDAO;
-import br.com.ronick.model.entidade.Produto;
+import br.com.ronick.model.DAO.ClienteDAO;
+import br.com.ronick.model.entidade.Cliente;
 import javax.swing.JOptionPane;
 
 /**
  * @author ronick
  */
-public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
+public class RemoverClienteGUI extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastrarCliente
      */
-    public RemoverProdutoGUI() {
+    public RemoverClienteGUI() {
         initComponents();
     }
 
@@ -28,19 +28,19 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         labelCpf = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        txCpf = new javax.swing.JFormattedTextField();
+        bRemover = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         labelNome = new javax.swing.JLabel();
         labelTelefone = new javax.swing.JLabel();
         labelEndereco = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txQtde = new javax.swing.JTextPane();
+        txTelefone = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txPreco = new javax.swing.JTextPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
         txNome = new javax.swing.JTextPane();
-        txCodigo = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txEndereco = new javax.swing.JTextPane();
+        bVerifica = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -48,16 +48,22 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(0, 70, 74));
 
         jPanel2.setBackground(new java.awt.Color(0, 70, 74));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Remover Produto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft Himalaya", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Remover Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft Himalaya", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
         labelCpf.setFont(new java.awt.Font("Microsoft Himalaya", 0, 24)); // NOI18N
         labelCpf.setForeground(new java.awt.Color(255, 255, 255));
-        labelCpf.setText("Código do produto");
+        labelCpf.setText("CPF a ser removido");
 
-        jButton1.setText("Remover");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        try {
+            txCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        bRemover.setText("Remover");
+        bRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bRemoverActionPerformed(evt);
             }
         });
 
@@ -70,34 +76,41 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
 
         labelTelefone.setFont(new java.awt.Font("Microsoft Himalaya", 0, 24)); // NOI18N
         labelTelefone.setForeground(new java.awt.Color(255, 255, 255));
-        labelTelefone.setText("Preco");
+        labelTelefone.setText("Telefone");
 
         labelEndereco.setFont(new java.awt.Font("Microsoft Himalaya", 0, 24)); // NOI18N
         labelEndereco.setForeground(new java.awt.Color(255, 255, 255));
-        labelEndereco.setText("Estoque");
+        labelEndereco.setText("Endereço");
 
-        jScrollPane1.setViewportView(txQtde);
+        txTelefone.setEditable(false);
+        jScrollPane1.setViewportView(txTelefone);
 
-        jScrollPane2.setViewportView(txPreco);
+        txNome.setEditable(false);
+        jScrollPane2.setViewportView(txNome);
 
-        jScrollPane3.setViewportView(txNome);
+        txEndereco.setEditable(false);
+        jScrollPane3.setViewportView(txEndereco);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelNome)
-                    .addComponent(labelTelefone)
-                    .addComponent(labelEndereco))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(labelEndereco)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelNome)
+                            .addComponent(labelTelefone))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,22 +118,22 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNome)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelTelefone)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelEndereco)
+                    .addComponent(labelTelefone)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEndereco)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
-        jButton2.setText("Verificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bVerifica.setText("Verificar");
+        bVerifica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bVerificaActionPerformed(evt);
             }
         });
 
@@ -131,16 +144,16 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(labelCpf)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bVerifica)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(bRemover))
                 .addGap(86, 86, 86))
         );
         jPanel2Layout.setVerticalGroup(
@@ -148,14 +161,14 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCpf)
-                    .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(bVerifica))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(23, 23, 23))
+                .addComponent(bRemover)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -164,15 +177,15 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,24 +205,28 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
         setBounds(0, 0, 694, 429);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Produto produto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
-        txNome.setText(produto.getNome());
-        txPreco.setText(String.format(produto.getPreco() + ""));
-        txQtde.setText(String.format(produto.getQtdeEstoque() + ""));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void bVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificaActionPerformed
+        Cliente cliente = ClienteDAO.selecionarPorCpf(txCpf.getText());
+        txNome.setText(cliente.getNome());
+        txTelefone.setText(cliente.getTelefone());
+        txEndereco.setText(cliente.getEndereco());
+    }//GEN-LAST:event_bVerificaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Produto produto = ProdutoDAO.selecionarPorId(Integer.parseInt(txCodigo.getText()));
-        ProdutoDAO.remove(produto.getId());
-        JOptionPane.showMessageDialog(null, "Cliente removido com sucesso");
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void bRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverActionPerformed
+        if (!txNome.getText().isEmpty()) {
+            Cliente cliente = ClienteDAO.selecionarPorCpf(txCpf.getText());
+            ClienteDAO.remove(cliente.getId());
+            JOptionPane.showMessageDialog(null, "Cliente removido com sucesso");
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Não existem dados a serem inseridos");
+        }
+    }//GEN-LAST:event_bRemoverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton bRemover;
+    private javax.swing.JButton bVerifica;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -220,9 +237,9 @@ public class RemoverProdutoGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelEndereco;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelTelefone;
-    private javax.swing.JTextField txCodigo;
+    private javax.swing.JFormattedTextField txCpf;
+    private javax.swing.JTextPane txEndereco;
     private javax.swing.JTextPane txNome;
-    private javax.swing.JTextPane txPreco;
-    private javax.swing.JTextPane txQtde;
+    private javax.swing.JTextPane txTelefone;
     // End of variables declaration//GEN-END:variables
 }
