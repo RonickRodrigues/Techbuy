@@ -1,5 +1,9 @@
 package br.com.ronick.view;
 
+import br.com.ronick.controller.TechbuyDB;
+import br.com.ronick.model.DAO.UsuarioDAO;
+import br.com.ronick.model.entidade.Usuario;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +18,7 @@ public class InicioGUI extends javax.swing.JDialog {
     public InicioGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        TechbuyDB.inicializarDB();
     }
 
     /**
@@ -32,9 +37,9 @@ public class InicioGUI extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txNome = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txSenha = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         bEntrarInicio = new javax.swing.JButton();
+        txSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Techbuy login");
@@ -58,11 +63,11 @@ public class InicioGUI extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Digite seu Nome:");
+        jLabel4.setText("Login");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Digite sua Senha:");
+        jLabel5.setText("Senha");
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("version v0.0.1 prototype");
@@ -78,29 +83,34 @@ public class InicioGUI extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(452, Short.MAX_VALUE)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(116, 116, 116)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(bEntrarInicio)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel1)))
-                            .addComponent(txNome, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                            .addComponent(txSenha))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                            .addComponent(txNome)
+                            .addComponent(txSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,8 +127,8 @@ public class InicioGUI extends javax.swing.JDialog {
                     .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(txSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(bEntrarInicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
@@ -148,12 +158,19 @@ public class InicioGUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bEntrarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarInicioActionPerformed
-        if (String.format(txNome.getText()) != "") {
-            nomeUsuario = String.format(txNome.getText());
-            entrarPrincipal = true;
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Digite o nome para continuar");
+        List<Usuario> usuario;
+        usuario = UsuarioDAO.selecionarTodos();
+        boolean userExist = false;
+        for (Usuario user : usuario) {
+            if (txNome.getText().equals(user.getLogin()) && new String(txSenha.getPassword()).equals(user.getSenha())) {
+                nomeUsuario = String.format(txNome.getText());
+                entrarPrincipal = true;
+                userExist = true;
+                this.dispose();
+            }
+        }
+        if (userExist == false) {
+            JOptionPane.showMessageDialog(null, "Login ou senha são inválidos");
         }
     }//GEN-LAST:event_bEntrarInicioActionPerformed
 
@@ -209,6 +226,6 @@ public class InicioGUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txNome;
-    private javax.swing.JTextField txSenha;
+    private javax.swing.JPasswordField txSenha;
     // End of variables declaration//GEN-END:variables
 }

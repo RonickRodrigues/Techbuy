@@ -8,8 +8,9 @@ import br.com.ronick.view.cliente.RemoverClienteGUI;
 import br.com.ronick.view.cliente.CadastrarClienteGUI;
 import br.com.ronick.view.cliente.AlterarClienteGUI;
 import br.com.ronick.controller.BaseFacade;
-import br.com.ronick.controller.TechbuyDB;
 import br.com.ronick.model.DAO.VendaDAO;
+import br.com.ronick.view.usuario.AlterarUsuarioGUI;
+import br.com.ronick.view.usuario.CadastrarUsuarioGUI;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -25,7 +26,6 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
     public TelaPrincipalGUI() {
 
         initComponents();
-        TechbuyDB.inicializarDB();
         telaUsuario();
         atualiza();
     }
@@ -97,6 +97,9 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
         };
         bAtualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mbNovoUsuario = new javax.swing.JMenuItem();
+        mbAlteraUsuario = new javax.swing.JMenuItem();
         mCliente = new javax.swing.JMenu();
         mbCadastrarCliente = new javax.swing.JMenuItem();
         mbAlterarCliente = new javax.swing.JMenuItem();
@@ -271,11 +274,36 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
         jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenuBar1.setForeground(new java.awt.Color(0, 51, 51));
 
+        jMenu1.setText("Usuario");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mbNovoUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mbNovoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user.png"))); // NOI18N
+        mbNovoUsuario.setText("Novo usuario");
+        mbNovoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbNovoUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mbNovoUsuario);
+
+        mbAlteraUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mbAlteraUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user_edit.png"))); // NOI18N
+        mbAlteraUsuario.setText("Alterar senha de usuario");
+        mbAlteraUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbAlteraUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mbAlteraUsuario);
+
+        jMenuBar1.add(jMenu1);
+
         mCliente.setText("Cliente");
         mCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         mbCadastrarCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        mbCadastrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user_add.png"))); // NOI18N
+        mbCadastrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/group_add.png"))); // NOI18N
         mbCadastrarCliente.setText("Cadastrar novo cliente");
         mbCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,7 +313,7 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
         mCliente.add(mbCadastrarCliente);
 
         mbAlterarCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        mbAlterarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user_edit.png"))); // NOI18N
+        mbAlterarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/group_edit.png"))); // NOI18N
         mbAlterarCliente.setText("Alterar cadastro do cliente");
         mbAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,6 +451,18 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
         atualiza();
     }//GEN-LAST:event_bAtualizarActionPerformed
 
+    private void mbNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbNovoUsuarioActionPerformed
+        CadastrarUsuarioGUI tCadUser = new CadastrarUsuarioGUI();
+        jDPane.add(tCadUser);
+        tCadUser.setVisible(true);
+    }//GEN-LAST:event_mbNovoUsuarioActionPerformed
+
+    private void mbAlteraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbAlteraUsuarioActionPerformed
+        AlterarUsuarioGUI tAltUser = new AlterarUsuarioGUI();
+        jDPane.add(tAltUser);
+        tAltUser.setVisible(true);
+    }//GEN-LAST:event_mbAlteraUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -465,6 +505,7 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JButton bRealizarVenda;
     private javax.swing.JLabel buy;
     private javax.swing.JDesktopPane jDPane;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -474,10 +515,12 @@ public class TelaPrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lojaDeEletronico;
     private javax.swing.JMenu mCliente;
     private javax.swing.JMenu mProduto;
+    private javax.swing.JMenuItem mbAlteraUsuario;
     private javax.swing.JMenuItem mbAlterarCliente;
     private javax.swing.JMenuItem mbAlterarProduto;
     private javax.swing.JMenuItem mbCadastrarCliente;
     private javax.swing.JMenuItem mbCadastrarProduto;
+    private javax.swing.JMenuItem mbNovoUsuario;
     private javax.swing.JMenuItem mbRemoverCliente;
     private javax.swing.JMenuItem mbRemoverProduto;
     private javax.swing.JPanel pPrincipal;

@@ -68,5 +68,19 @@ public class TechbuyDB {
                 + "valorVenda int not null"
                 + ")";
         execute(sql, true);
+        sql = "create table if not exists usuario ( "
+                + "id int auto_increment not null primary key, "
+                + "login varchar(10) not null unique, "
+                + "senha varchar(10) not null "
+                + ")";
+        execute(sql, true);
+        
+        
+            // Senha de Administrador
+            
+        sql = "insert into usuario "
+            + "(login, senha) "
+            + "values ('admin', 'admin')";
+        execute(sql, true);
     }
 }
